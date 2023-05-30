@@ -1,0 +1,17 @@
+<div *ngIf="group">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>{{ group.name }}</h4>
+      <p>Total expense: ₹{{ group.total_expense }}</p>
+      <ul *ngIf="expenses.length > 0" class="list-group">
+        <app-expense
+          *ngFor="let expense of expenses"
+          [expense]="expense"
+        ></app-expense>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<a class="list-group-item" style="cursor: pointer" *ngIf="expense && user">
+    <h5 class="list-group-item-heading">{{expense.description}}</h5>
+    <p class="list-group-item-text">{{ user.name }} paid ₹{{expense.amount}}</p>
+    <p class="list-group-item-text">{{expense.expense_date | date: 'MMMM d, y'}}</p>
+</a>

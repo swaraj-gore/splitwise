@@ -1,0 +1,32 @@
+<button class="btn btn-light" (click)="onManageMember()">Manage Members</button>
+<ul class="list-group">
+  <h4>Group Summary</h4>
+  <li 
+    *ngFor="let summary of groupSummary"
+    class="list-group-item">
+    <h6
+      class="list-group-heading">
+        {{summary.name}} {{getSummaryText(summary.settlement_status)}} ₹<span [ngStyle]="{
+          'color': summary.settlement_status === 'OWES' ? 'red' : 'green'
+        }">
+          {{summary.settlement_amount}}
+        </span>
+      </h6>
+    <p
+      [ngStyle]="{
+        'display': summary.name === lent.lender ? 'block' : 'none'
+      }"
+      *ngFor="let lent of lentSummary"
+      class="list-group-item-text">
+      {{lent.lent_to}} owes <span style="color: green">{{lent.amount}}</span> to {{lent.lender}}
+    </p>
+    <p
+      [ngStyle]="{
+        'display': summary.name === lent.lent_to ? 'block' : 'none'
+      }"
+      *ngFor="let lent of lentSummary"
+      class="list-group-item-text">
+      {{lent.lent_to}} owes <span style="color: red">{{lent.amount}}</span> to {{lent.lender}}
+    </p>
+  </li>
+</ul>

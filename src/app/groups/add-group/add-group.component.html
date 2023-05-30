@@ -1,0 +1,34 @@
+<form 
+  [formGroup]="addGroupForm" 
+  (ngSubmit)="onSubmit()">
+  <h4>Add Group</h4>
+  <div class="form-group">
+    <label for="name">Group Name</label>
+    <input 
+      id="name"
+      type="text"
+      class="form-control"
+      formControlName="name"
+      [ngClass]="{
+        'is-invalid': !addGroupForm.get('name').valid && addGroupForm.get('name').touched
+      }"
+    >
+    <span 
+      class="help-block"
+      *ngIf="!addGroupForm.get('name').valid && addGroupForm.get('name').touched">
+      Group Name is required!
+    </span>
+  </div>
+  <button 
+    style="margin-top: 10px" 
+    class="btn btn-success" 
+    type="submit"
+    [disabled]="!addGroupForm.valid"
+    >Save</button>
+  <button 
+    style="margin-top: 10px; margin-left: 10px" 
+    class="btn btn-danger" 
+    (click)="onClear()"
+    type="button"
+  >Clear</button>
+</form>

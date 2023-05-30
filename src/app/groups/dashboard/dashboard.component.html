@@ -1,0 +1,78 @@
+<div id="add-expense" class="row">
+    <div class="col-md-6">
+      <form [formGroup]="addExpenseForm" (ngSubmit)="onAddExpense()">
+        <h5>Add Expense</h5>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input 
+            id="description"
+            type="text"
+            class="form-control"
+            formControlName="expenseDescription"
+            [ngClass]="{
+              'is-invalid': isInvalid('expenseDescription')
+            }">
+            <span class="help-block" *ngIf="isInvalid('expenseDescription')">
+              Description is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="group-name">Group Name</label>
+          <select 
+            id="group-name"
+            type="text"
+            class="form-control"
+            formControlName="groupId"
+            [ngClass]="{
+              'is-invalid': isInvalid('groupId')
+            }">
+            <option 
+              *ngFor="let group of groups"
+              [value]="group.group_id">
+              {{group.name}}
+            </option>
+          </select>
+          <span class="help-block" *ngIf="isInvalid('groupId')">
+            Please select the group name!
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input 
+            id="amount"
+            type="number"
+            class="form-control"
+            formControlName="expenseAmount"
+            [ngClass]="{
+              'is-invalid': isInvalid('expenseAmount') || isAmountInvalid()
+            }">
+            <span class="help-block">
+              <span *ngIf="isInvalid('expenseAmount')">Please enter the amount!</span>
+              <span *ngIf="isAmountInvalid()">Amount should be greater than 0!</span>
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input 
+            id="date"
+            type="date"
+            class="form-control"
+            formControlName="expenseDate"
+            [ngClass]="{
+              'is-invalid': isInvalid('expenseDate') || isDateInvalid()
+            }">
+          <span *ngIf="isDateInvalid()">Date cannot be greater than today!</span>
+        </div>
+        <button
+          class="btn btn-primary" 
+          type="submit"
+          style="margin-right: 10px"
+          [disabled]="!addExpenseForm.valid"
+          >Save</button>
+        <button
+          class="btn btn-danger" 
+          type="reset"
+        >Reset</button>
+      </form>
+    </div>
+  </div>

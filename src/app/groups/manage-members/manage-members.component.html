@@ -1,0 +1,30 @@
+<button class="btn btn-light" style="margin-bottom: 10px" (click)="onGotToSummary()">Go to Summary</button>
+<h5>Add Members</h5>
+<form [formGroup]="addMemberForm" (ngSubmit)="onAddMembers()">
+    <div class="form-group">
+        <label for="nonMembers">Select Members to Add:</label>
+        <select class="form-control" multiple formControlName="selectedMembers">
+            <option *ngFor="let user of nonMembers" [value]="user.user_id">{{ user.name }}</option>
+        </select>
+    </div>
+    <button 
+        type="submit" 
+        class="btn btn-success"
+        [disabled]="!addMemberForm.valid">Add to Group</button>
+    <button type="button" class="btn btn-outline-danger" (click)="onClear()">Clear</button>
+</form>
+<hr>
+<h5>Group Members</h5>
+
+<ul class="list-group">
+    <li *ngFor="let member of members" class="list-group-item">
+    {{ member.name }}
+    <button 
+        class="btn btn-outline-danger btn-sm float-end" 
+        (click)="onRemoveMember(member.user_id)"
+        [disabled]="member.user_id === loggedInUserId">
+        Remove
+    </button>
+    </li>
+</ul>
+  
