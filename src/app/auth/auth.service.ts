@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { User } from '../model/user.model';
 
 export interface AuthResponse {
@@ -17,6 +17,11 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private authUrl = 'http://localhost:3000/auth';
   private logOutTimer: any;
+  private logoutSubject: Subject<void> = new Subject<void>();
+
+  get logout$(): Observable<void> {
+    return this.logoutSubject.asObservable();
+  }
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -56,6 +61,7 @@ export class AuthService {
       clearTimeout(this.logOutTimer)
     }
     this.logOutTimer = null;
+    this.unsubscribe();
   }
 
   autoLogin() {
@@ -72,6 +78,7 @@ export class AuthService {
     }
 
     let loadedUser = new User(+userData.user_id, userData.name, userData.email, userData._token, new Date(userData._tokenExpirationDate));
+
     if(loadedUser.token) {
       this.user.next(loadedUser);
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
@@ -94,17 +101,21 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-      let errorMessage = 'An unkown error occured!';
-      if (!errorRes.error || !errorRes.error.message)
-        return throwError(() => errorMessage);
-      switch (errorRes.error.message) {
-        case 'EMAIL_EXISTS':
-          errorMessage = 'This email exists already!';
-          break;
-        case 'INVALID_CREDENTIALS':
-          errorMessage = 'Invalid credentials. Please try again!';
-          break;
-      }
+    let errorMessage = 'An unkown error occured!';
+    if (!errorRes.error || !errorRes.error.message)
       return throwError(() => errorMessage);
+    switch (errorRes.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email exists already!';
+        break;
+      case 'INVALID_CREDENTIALS':
+        errorMessage = 'Invalid credentials. Please try again!';
+        break;
+    }
+    return throwError(() => errorMessage);
+  }
+
+  private unsubscribe() {
+    this.logoutSubject.unsubscribe()
   }
 }

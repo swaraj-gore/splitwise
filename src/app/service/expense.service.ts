@@ -1,16 +1,25 @@
 import { Injectable } from "@angular/core";
 import { Expense } from "../model/expense.model";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subscription } from "rxjs";
 import { tap } from "rxjs/operators";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { GroupService } from "../groups/group.service";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({providedIn: 'root'})
 export class ExpenseService {
     private baseUrl = "http://localhost:3000/expenses";
+    private logOutSubscription: Subscription;
+
     expenses = new BehaviorSubject<Expense[]>([]);
+    
     constructor(private http: HttpClient,
-                private groupService: GroupService) {}
+                private groupService: GroupService,
+                private authService: AuthService) {
+        this.logOutSubscription = this.authService.logout$.subscribe(
+            () => this.unsubscribe()
+        )
+    }
 
     getExpenseByGroupId(groupId: number) {
         return this.http
@@ -27,6 +36,11 @@ export class ExpenseService {
         return this.http.post(`${this.baseUrl}/create`, expense).subscribe(
             (response) => this.groupService.fetchGroups()
         );
+    }
+
+    unsubscribe() {
+        this.logOutSubscription.unsubscribe();
+        this.expenses.unsubscribe();
     }
 
 
