@@ -61,7 +61,7 @@ export class AuthService {
       clearTimeout(this.logOutTimer)
     }
     this.logOutTimer = null;
-    this.unsubscribe();
+    this.logoutSubject.next();
   }
 
   autoLogin() {
@@ -96,7 +96,7 @@ export class AuthService {
     const expirationDate: Date = new Date(expiresIn * 1000);
     const user = new User(userId, name, email, token, expirationDate);
     this.user.next(user);
-    this.autoLogOut(expiresIn * 1000)
+    this.autoLogOut(expiresIn * 1000 - new Date().getTime())
     localStorage.setItem("userData", JSON.stringify(user));
   }
 
@@ -113,9 +113,5 @@ export class AuthService {
         break;
     }
     return throwError(() => errorMessage);
-  }
-
-  private unsubscribe() {
-    this.logoutSubject.unsubscribe()
   }
 }
