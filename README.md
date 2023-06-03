@@ -1,27 +1,34 @@
 # Splitwise
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
+This web application inspired by [Splitwise](https://secure.splitwise.com/), designed to help users track and manage shared expenses within groups.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- User Registration and Authentication: Users can create accounts, log in, and securely access their expense data.
+- Group Creation and Management: Users can create groups, add others, and manage group settings.
+- Expense Tracking: Users can add expenses, specify the amount, description, and date, and assign them to specific groups.
+- Splitting Expenses: Expenses can be divided equally among group members.
+- Expense Summary: Users can view an overview of their expenses, including total owed and balances within each group.
 
-## Code scaffolding
+## Tech Stack
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Frontend: Angular, HTML5, CSS3, Bootstrap
+- Backend: Express.js, Node.js
+- Database: MySQL
 
-## Build
+## Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Register a new user account or log in with existing credentials.
+2. Create a group.
+3. Add expenses, specify details, and assign them to specific groups.
+4. View expense summary and balances within each group.
+5. Add other users to the groups and track expenses collaboratively.
 
-## Running unit tests
+## License
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This project is licensed under the [MIT License](LICENSE)..
 
-## Running end-to-end tests
+## Acknowledgements
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Special thanks to [Splitwise](https://secure.splitwise.com/) for providing inspiration for this expense tracking application.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
