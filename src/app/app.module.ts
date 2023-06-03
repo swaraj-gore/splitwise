@@ -7,15 +7,15 @@ import { AppComponent } from './app.component';
 import { GroupComponent } from './groups/group/group.component';
 import { GroupsComponent } from './groups/groups.component';
 import { HeaderComponent } from './header/header.component';
-import { ExpenseComponent } from './groups/expense/expense.component';
+import { ExpenseComponent } from './groups/group/group-detail/expense/expense.component';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
-import { DashboardComponent } from './groups/dashboard/dashboard.component';
-import { GroupSummaryComponent } from './groups/group-summary/group-summary.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GroupSummaryComponent } from './groups/group/group-detail/group-summary/group-summary.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { GroupDetailComponent } from './groups/group-detail/group-detail.component';
-import { ManageMembersComponent } from './groups/manage-members/manage-members.component';
+import { GroupDetailComponent } from './groups/group/group-detail/group-detail.component';
+import { ManageMembersComponent } from './groups/group/group-detail/manage-members/manage-members.component';
 
 @NgModule({
   imports: [

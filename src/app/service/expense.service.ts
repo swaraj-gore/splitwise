@@ -3,7 +3,7 @@ import { Expense } from "../model/expense.model";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { tap } from "rxjs/operators";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { GroupService } from "../groups/group.service";
+import { GroupService } from "./group.service";
 import { AuthService } from "../auth/auth.service";
 
 @Injectable({providedIn: 'root'})

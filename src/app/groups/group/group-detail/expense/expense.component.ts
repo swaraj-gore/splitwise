@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Expense } from '../../model/expense.model';
-import { UserResponse, UserService } from '../../service/user.service';
+import { Expense } from '../../../../model/expense.model';
+import { UserResponse, UserService } from '../../../../service/user.service';
 
 @Component({
   selector: 'app-expense',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Group } from './group.model';
-import { GroupService } from './group.service';
+import { Group } from '../model/group.model';
+import { GroupService } from '../service/group.service';
 
 @Component({
   selector: 'app-groups',

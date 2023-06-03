@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Group } from '../group.model';
-import { GroupService } from '../group.service';
+import { Group } from '../../../model/group.model';
+import { GroupService } from '../../../service/group.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Expense } from '../../model/expense.model';
-import { ExpenseService } from '../../service/expense.service';
+import { Expense } from '../../../model/expense.model';
+import { ExpenseService } from '../../../service/expense.service';
 
 @Component({
   selector: 'app-group-detail',

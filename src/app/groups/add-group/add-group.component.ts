@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GroupService } from '../group.service';
+import { GroupService } from '../../service/group.service';
 
 @Component({
   selector: 'app-add-group',

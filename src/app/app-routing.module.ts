@@ -2,12 +2,12 @@ import { NgModule } from "@angular/core";
 import { Route, RouterModule } from "@angular/router";
 import { GroupsComponent } from "./groups/groups.component";
 import { AddGroupComponent } from "./groups/add-group/add-group.component";
-import { DashboardComponent } from "./groups/dashboard/dashboard.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthComponent } from "./auth/auth.component";
 import { canActiate } from "./auth/auth.guard";
-import { GroupDetailComponent } from "./groups/group-detail/group-detail.component";
-import { GroupSummaryComponent } from "./groups/group-summary/group-summary.component";
-import { ManageMembersComponent } from "./groups/manage-members/manage-members.component";
+import { GroupDetailComponent } from "./groups/group/group-detail/group-detail.component";
+import { GroupSummaryComponent } from "./groups/group/group-detail/group-summary/group-summary.component";
+import { ManageMembersComponent } from "./groups/group/group-detail/manage-members/manage-members.component";
 
 
 const appRoutes: Route[] = [

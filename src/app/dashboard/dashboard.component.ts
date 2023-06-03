@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Expense } from '../../model/expense.model';
-import { Group } from '../group.model';
-import { UserService } from '../../service/user.service';
-import { User } from '../../model/user.model';
-import { AuthService } from '../../auth/auth.service';
+import { Expense } from '../model/expense.model';
+import { Group } from '../model/group.model';
+import { UserService } from '../service/user.service';
+import { User } from '../model/user.model';
+import { AuthService } from '../auth/auth.service';
 import { ExpenseService } from 'src/app/service/expense.service';
-import { GroupService } from '../group.service';
+import { GroupService } from '../service/group.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { map, tap } from "rxjs/operators";
-import { Group } from "./group.model";
-import { UserResponse } from "../service/user.service";
+import { Group } from "../model/group.model";
+import { UserResponse } from "./user.service";
 import { AuthService } from "../auth/auth.service";
 
 @Injectable({providedIn: "root"})

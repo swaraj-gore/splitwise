@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Group } from '../group.model';
+import { Group } from '../../model/group.model';
 
 @Component({
   selector: 'app-group',

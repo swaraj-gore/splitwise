@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { GroupService } from '../group.service';
+import { GroupService } from '../../../../service/group.service';
 
 @Component({
   selector: 'app-group-summary',

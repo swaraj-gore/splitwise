@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserResponse } from 'src/app/service/user.service';
-import { GroupService } from '../group.service';
+import { GroupService } from '../../../../service/group.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
