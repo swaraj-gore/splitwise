@@ -3,11 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Expense } from '../../model/expense.model';
 import { Group } from '../group.model';
-import { GroupService } from '../../service/group.service';
 import { UserService } from '../../service/user.service';
 import { User } from '../../model/user.model';
 import { AuthService } from '../../auth/auth.service';
 import { ExpenseService } from 'src/app/service/expense.service';
+import { GroupService } from '../group.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,13 +40,14 @@ export class DashboardComponent {
         this.dateValidator
       ])
     });
-    this.groupService.groupsChanged.subscribe(
+
+    this.groupService.fetchGroups();
+    this.groupService.groups.subscribe(
       (groups: Group[]) => {
         this.groups = groups;
       }
     )
 
-    this.groups = this.groupService.getGroups();
     this.authService.user.subscribe(
       (user) => this.user = user
     )
