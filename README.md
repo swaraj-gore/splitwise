@@ -2,6 +2,8 @@
 
 This web application inspired by [Splitwise](https://secure.splitwise.com/), designed to help users track and manage shared expenses within groups.
 
+Checkout the backend repository [here](https://github.com/swaraj-gore/splitwise-server).
+
 ## Features
 
 - User Registration and Authentication: Users can create accounts, log in, and securely access their expense data.
@@ -15,7 +17,7 @@ This web application inspired by [Splitwise](https://secure.splitwise.com/), des
 - Frontend: Angular, HTML5, CSS3, Bootstrap
 - Backend: Express.js, Node.js
 - Database: MySQL
-- 
+
 ## Usage
 
 1. Register a new user account or log in with existing credentials.
