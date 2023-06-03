@@ -17,11 +17,6 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private authUrl = 'http://localhost:3000/auth';
   private logOutTimer: any;
-  private logoutSubject: Subject<void> = new Subject<void>();
-
-  get logout$(): Observable<void> {
-    return this.logoutSubject.asObservable();
-  }
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -61,7 +56,6 @@ export class AuthService {
       clearTimeout(this.logOutTimer)
     }
     this.logOutTimer = null;
-    this.logoutSubject.next();
   }
 
   autoLogin() {

@@ -1,22 +1,16 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { Group } from "../model/group.model";
 import { UserResponse } from "./user.service";
-import { AuthService } from "../auth/auth.service";
 
-@Injectable({providedIn: "root"})
-export class GroupService {
+@Injectable({providedIn: 'root'})
+export class GroupService implements OnDestroy{
   groups = new BehaviorSubject<Group[]>([]);
-  private logOutSubscription: Subscription; 
   private baseUrl: string = 'http://localhost:3000/groups'
 
-  constructor(private http: HttpClient,
-              private authService: AuthService) {
-    this.logOutSubscription = this.authService.logout$.subscribe(() => {
-      this.unsubscribe();
-    });
+  constructor(private http: HttpClient) {
     this.fetchGroups();
   }
 
@@ -76,8 +70,7 @@ export class GroupService {
     )
   }
 
-  unsubscribe() {
-    this.logOutSubscription.unsubscribe();
+  ngOnDestroy() {
     this.groups.unsubscribe();
   }
 }

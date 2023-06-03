@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Expense } from '../model/expense.model';
 import { Group } from '../model/group.model';
 import { UserService } from '../service/user.service';
 import { User } from '../model/user.model';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../service/auth.service';
 import { ExpenseService } from 'src/app/service/expense.service';
 import { GroupService } from '../service/group.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +16,13 @@ import { GroupService } from '../service/group.service';
   styleUrls: ['./dashboard.component.css'],
   providers: [UserService]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnDestroy{
   addExpenseForm: FormGroup;
   groups: Group[] = [];
   user: User;
+  
+  private groupsSubscription: Subscription;
+
   constructor(private groupService: GroupService,
               private authService: AuthService,
               private expenseService: ExpenseService,
@@ -42,7 +46,7 @@ export class DashboardComponent {
     });
 
     this.groupService.fetchGroups();
-    this.groupService.groups.subscribe(
+    this.groupsSubscription = this.groupService.groups.subscribe(
       (groups: Group[]) => {
         this.groups = groups;
       }
@@ -62,7 +66,9 @@ export class DashboardComponent {
       this.user.user_id,
       groupId
     );
-    this.expenseService.addExpense(expense);
+    this.expenseService.addExpense(expense).subscribe(
+      (response) => this.groupService.fetchGroups()
+    );
     this.addExpenseForm.reset()
     this.router.navigate(['groups'])
   }
@@ -98,6 +104,10 @@ export class DashboardComponent {
 
   onReset() {
     this.addExpenseForm.reset()
+  }
+
+  ngOnDestroy(): void {
+    this.groupsSubscription?.unsubscribe();
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Expense } from '../../../../model/expense.model';
 import { UserResponse, UserService } from '../../../../service/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-expense',
@@ -8,14 +9,20 @@ import { UserResponse, UserService } from '../../../../service/user.service';
   styleUrls: ['./expense.component.css'],
   providers: [UserService]
 })
-export class ExpenseComponent implements OnInit{
+export class ExpenseComponent implements OnInit, OnDestroy{
 
   @Input() expense: Expense;
   user: UserResponse;
+  private userSubscription: Subscription;
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getUser(this.expense.user_id);
-    this.userService.user.subscribe(user => this.user = user)
+    this.userSubscription = this.userService.user.subscribe(user => this.user = user)
   }
+
+  ngOnDestroy(): void {
+    this.userSubscription?.unsubscribe();
+  }
+
 }

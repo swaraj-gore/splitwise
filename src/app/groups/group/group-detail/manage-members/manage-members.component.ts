@@ -1,21 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserResponse } from 'src/app/service/user.service';
 import { GroupService } from '../../../../service/group.service';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manage-members',
   templateUrl: './manage-members.component.html',
   styleUrls: ['./manage-members.component.css']
 })
-export class ManageMembersComponent {
+export class ManageMembersComponent implements OnDestroy{
   addMemberForm: FormGroup;
   nonMembers: UserResponse[] = []
   members: UserResponse[] = []
   groupId: number;
   loggedInUserId: number
+
+  private userSubscription: Subscription;
 
   constructor(private groupService: GroupService,
               private authService: AuthService,
@@ -24,8 +27,8 @@ export class ManageMembersComponent {
               private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.authService.user.subscribe(
-      user => this.loggedInUserId = user.user_id
+    this.userSubscription = this.authService.user.subscribe(
+      user => this.loggedInUserId = user?.user_id
     )
     this.route.parent?.params.subscribe(
       (params: Params) => {
@@ -55,7 +58,6 @@ export class ManageMembersComponent {
 
   onAddMembers() {
     const selectedMembers = this.addMemberForm.value.selectedMembers;
-    console.log(selectedMembers)
     this.groupService.addMembers(this.groupId, selectedMembers).subscribe(
       () => {
         this.fetchNonMembers();
@@ -80,5 +82,9 @@ export class ManageMembersComponent {
 
   onGotToSummary() {
     this.router.navigate(['../summary'], {relativeTo: this.route})
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }
