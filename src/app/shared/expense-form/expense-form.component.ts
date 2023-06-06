@@ -11,6 +11,7 @@ import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { ExpenseService } from 'src/app/service/expense.service';
 import { GroupService } from 'src/app/service/group.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-expense-form',
@@ -36,7 +37,8 @@ export class ExpenseFormComponent implements OnInit {
               private authService: AuthService,
               private expenseService: ExpenseService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit() {
     this.authService.user.subscribe(
@@ -134,7 +136,7 @@ export class ExpenseFormComponent implements OnInit {
           this.groupService.groupsChanged.next();
         }
       )
-      this.router.navigate(['../../../summary'], {relativeTo: this.route});
+      this.location.back();
     }
   }
 
@@ -180,7 +182,7 @@ export class ExpenseFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['../../../summary'], {relativeTo: this.route});
+    this.location.back();
   }
 
   onReset() {
