@@ -2,13 +2,13 @@ export class Expense {
   expense_id: number
   description: string
   amount: number
-  expense_date: Date
+  expense_date: string
   user_id: number
   group_id: number
 
   constructor(description: string,
               amount: number,
-              expense_date: Date,
+              expense_date: string,
               user_id: number,
               group_id: number) {
     this.description = description
