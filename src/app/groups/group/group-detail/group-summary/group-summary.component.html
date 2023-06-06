@@ -18,7 +18,7 @@
       }"
       *ngFor="let lent of lentSummary"
       class="list-group-item-text">
-      {{lent.lent_to}} owes <span style="color: green">{{lent.amount}}</span> to {{lent.lender}}
+      {{lent.lent_to}} owes <span style="color: green">{{lent.amount}}</span> to {{lent.lender}} for {{lent.for}}
     </p>
     <p
       [ngStyle]="{
@@ -26,7 +26,7 @@
       }"
       *ngFor="let lent of lentSummary"
       class="list-group-item-text">
-      {{lent.lent_to}} owes <span style="color: red">{{lent.amount}}</span> to {{lent.lender}}
+      {{lent.lent_to}} owes <span style="color: red">{{lent.amount}}</span> to {{lent.lender}} for {{lent.for}}
     </p>
   </li>
 </ul>
