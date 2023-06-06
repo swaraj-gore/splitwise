@@ -16,6 +16,9 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { GroupDetailComponent } from './groups/group/group-detail/group-detail.component';
 import { ManageMembersComponent } from './groups/group/group-detail/manage-members/manage-members.component';
+import { ExpenseFormComponent } from './shared/expense-form/expense-form.component';
+import { ExpenseDetailComponent } from './groups/group/group-detail/expense/expense-detail/expense-detail.component';
+import { ExpenseEditComponent } from './groups/group/group-detail/expense/expense-detail/expense-edit/expense-edit.component';
 
 @NgModule({
   imports: [
@@ -37,7 +40,10 @@ import { ManageMembersComponent } from './groups/group/group-detail/manage-membe
     GroupSummaryComponent,
     AuthComponent,
     LoadingSpinnerComponent,
-    ManageMembersComponent
+    ManageMembersComponent,
+    ExpenseFormComponent,
+    ExpenseDetailComponent,
+    ExpenseEditComponent
   ],
   bootstrap: [AppComponent],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}]
