@@ -39,4 +39,9 @@ export class ExpenseService{
             .put(`${this.baseUrl}/${expenseId}`, newExpense);
     }
 
+    deleteExpense(expenseId: number) {
+        return this.http
+            .delete(`${this.baseUrl}/${expenseId}`);
+    }
+
 }
