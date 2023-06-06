@@ -8,6 +8,8 @@ import { canActiate } from "./auth/auth.guard";
 import { GroupDetailComponent } from "./groups/group/group-detail/group-detail.component";
 import { GroupSummaryComponent } from "./groups/group/group-detail/group-summary/group-summary.component";
 import { ManageMembersComponent } from "./groups/group/group-detail/manage-members/manage-members.component";
+import { ExpenseDetailComponent } from "./groups/group/group-detail/expense/expense-detail/expense-detail.component";
+import { ExpenseEditComponent } from "./groups/group/group-detail/expense/expense-detail/expense-edit/expense-edit.component";
 
 
 const appRoutes: Route[] = [
@@ -19,6 +21,13 @@ const appRoutes: Route[] = [
         { path: '', redirectTo: 'summary', pathMatch: 'full' },
         { path: 'summary', component: GroupSummaryComponent },
         { path: 'manage-members', component: ManageMembersComponent },
+        { path: 'expense', children: [
+            { path: ':expenseId', children: [
+              { path: '', component: ExpenseDetailComponent},
+              { path: 'edit', component: ExpenseEditComponent}
+            ]},
+          ]
+        },
       ]
     }
   ]},
