@@ -1,0 +1,82 @@
+<form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+    <h5>{{formHeading}}</h5>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input 
+        id="description"
+        type="text"
+        class="form-control"
+        formControlName="description"
+        [ngClass]="{
+          'is-invalid': isInvalid('description')
+        }">
+        <span class="help-block" *ngIf="isInvalid('description')">
+          Description is required!
+        </span>
+    </div>
+    <div class="form-group">
+      <label for="group-name">Group Name</label>
+      <select
+        id="group-name"
+        type="text"
+        class="form-control"
+        formControlName="group_id"
+        [ngClass]="{
+          'is-invalid': isInvalid('group_id')
+        }">
+        <option 
+          *ngFor="let group of groups"
+          [value]="group.group_id">
+          {{group.name}}
+        </option>
+      </select>
+      <span class="help-block" *ngIf="isInvalid('group_id')">
+        Please select the group name!
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input 
+        id="amount"
+        type="number"
+        class="form-control"
+        formControlName="amount"
+        [ngClass]="{
+          'is-invalid': isInvalid('amount') || isAmountInvalid()
+        }">
+        <span class="help-block">
+          <span *ngIf="isInvalid('amount')">Please enter the amount!</span>
+          <span *ngIf="isAmountInvalid()">Amount should be greater than 0!</span>
+        </span>
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input 
+        id="date"
+        type="datetime-local"
+        class="form-control"
+        formControlName="expense_date"
+        [ngClass]="{
+          'is-invalid': isInvalid('expense_date') || isDateInvalid()
+        }">
+      <span *ngIf="isDateInvalid()">Date cannot be greater than today!</span>
+    </div>
+    <button
+      class="btn btn-success" 
+      type="submit"
+      style="margin-right: 10px"
+      [disabled]="!expenseForm.valid || isEqual()"
+      >Save</button>
+    <button
+      class="btn btn-primary" 
+      type="button"
+      style="margin-right: 10px"
+      (click)="onReset()"
+      >Reset</button>
+    <button
+      *ngIf="isEdit"
+      class="btn btn-light" 
+      type="button"
+      (click)="onCancel()"
+    >Cancel</button>
+  </form>
