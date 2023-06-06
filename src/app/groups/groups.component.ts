@@ -24,6 +24,10 @@ export class GroupsComponent implements OnInit, OnDestroy {
         this.groups = groups;
       }
     )
+    this.groupService.fetchGroups();
+    this.groupService.groupsChanged.subscribe(
+      () => this.groupService.fetchGroups()
+    )
   }
 
   onAddGroup() {

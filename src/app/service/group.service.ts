@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Subscription } from "rxjs";
+import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { Group } from "../model/group.model";
 import { UserResponse } from "./user.service";
@@ -8,6 +8,7 @@ import { UserResponse } from "./user.service";
 @Injectable({providedIn: 'root'})
 export class GroupService implements OnDestroy{
   groups = new BehaviorSubject<Group[]>([]);
+  groupsChanged = new Subject<void>();
   private baseUrl: string = 'http://localhost:3000/groups'
 
   constructor(private http: HttpClient) {

@@ -30,6 +30,12 @@ export class GroupDetailComponent implements OnDestroy{
           this.expensesSubscription = this.expenseService.expenses.subscribe(
             (expense) => this.expenses = expense
           )
+          this.expenseService.expensesChanged.subscribe(
+            () => this.fetchExpenses()
+          )
+          this.groupService.groupsChanged.subscribe(
+            () => this.fetchGroup()
+          )
         }
       )
   }

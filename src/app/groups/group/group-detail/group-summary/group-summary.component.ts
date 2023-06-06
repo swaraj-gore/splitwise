@@ -31,6 +31,20 @@ export class GroupSummaryComponent implements OnInit {
             this.lentSummary = lentSummary;
           }
         )
+        this.groupService.groupsChanged.subscribe(
+          () => {
+            this.groupService.getGroupSummary(this.groupId).subscribe(
+              (groupSummary) => {
+                this.groupSummary = groupSummary;
+              }
+            )
+            this.groupService.getLentSummary(this.groupId).subscribe(
+              (lentSummary) => {
+                this.lentSummary = lentSummary;
+              }
+            )
+          }
+        )
       }
     )
   }
