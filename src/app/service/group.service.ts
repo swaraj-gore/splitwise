@@ -46,11 +46,7 @@ export class GroupService implements OnDestroy{
   }
 
   addGroup(group: { name: string }) {
-    return this.http.post(`${this.baseUrl}/create`, group).subscribe(
-      () => {
-        this.fetchGroups();
-      }
-    );
+    return this.http.post(`${this.baseUrl}/create`, group);
   }
 
   addMembers(groupId: number, memberIds: number[]) {
@@ -69,6 +65,14 @@ export class GroupService implements OnDestroy{
         () => this.fetchGroups()
       )
     )
+  }
+
+  updateGroup(groupId: number, name: string) {
+    return this.http.put(`${this.baseUrl}/${groupId}`, {name});
+  }
+
+  deleteGroup(groupId: number) {
+    return this.http.delete(`${this.baseUrl}/${groupId}`);
   }
 
   ngOnDestroy() {
