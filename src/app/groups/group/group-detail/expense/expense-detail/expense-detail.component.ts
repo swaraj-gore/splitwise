@@ -6,6 +6,7 @@ import { Expense } from 'src/app/model/expense.model';
 import { ExpenseService } from 'src/app/service/expense.service';
 import { UserResponse, UserService } from 'src/app/service/user.service';
 import { GroupService } from 'src/app/service/group.service';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-expense-detail',
@@ -17,6 +18,10 @@ export class ExpenseDetailComponent implements OnInit, OnDestroy {
   expenseId: number;
   expense: Expense;
   user: UserResponse;
+
+  faDelete = faTrash;
+  faEdit = faEdit;
+
   private userSubscription: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
