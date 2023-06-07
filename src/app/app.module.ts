@@ -8,7 +8,6 @@ import { GroupComponent } from './groups/group/group.component';
 import { GroupsComponent } from './groups/groups.component';
 import { HeaderComponent } from './header/header.component';
 import { ExpenseComponent } from './groups/group/group-detail/expense/expense.component';
-import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GroupSummaryComponent } from './groups/group/group-detail/group-summary/group-summary.component';
 import { AuthComponent } from './auth/auth.component';
@@ -18,7 +17,8 @@ import { GroupDetailComponent } from './groups/group/group-detail/group-detail.c
 import { ManageMembersComponent } from './groups/group/group-detail/manage-members/manage-members.component';
 import { ExpenseFormComponent } from './shared/expense-form/expense-form.component';
 import { ExpenseDetailComponent } from './groups/group/group-detail/expense/expense-detail/expense-detail.component';
-import { ExpenseEditComponent } from './groups/group/group-detail/expense/expense-detail/expense-edit/expense-edit.component';
+import { GroupFormComponent } from './shared/group-form/group-form.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -27,6 +27,7 @@ import { ExpenseEditComponent } from './groups/group/group-detail/expense/expens
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    FontAwesomeModule
   ],
   declarations: [
     AppComponent,
@@ -35,7 +36,6 @@ import { ExpenseEditComponent } from './groups/group/group-detail/expense/expens
     GroupComponent,
     GroupDetailComponent,
     ExpenseComponent,
-    AddGroupComponent,
     DashboardComponent,
     GroupSummaryComponent,
     AuthComponent,
@@ -43,7 +43,7 @@ import { ExpenseEditComponent } from './groups/group/group-detail/expense/expens
     ManageMembersComponent,
     ExpenseFormComponent,
     ExpenseDetailComponent,
-    ExpenseEditComponent
+    GroupFormComponent
   ],
   bootstrap: [AppComponent],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}]
