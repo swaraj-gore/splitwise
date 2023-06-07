@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router, UrlSegment } from '@angular/router';
@@ -17,13 +18,13 @@ export class GroupFormComponent {
   group: Group;
   constructor(private groupService: GroupService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private location: Location) { }
 
   ngOnInit() {
     this.initForm();
     this.route.url.subscribe(
       (url: UrlSegment[]) => {
-        if(url[0].path === "new") {
+        if(url[0].path === "new-group") {
           this.isEdit = false;
           this.formHeading = "Add Group";
         }
@@ -59,7 +60,7 @@ export class GroupFormComponent {
   onSubmit() {
     if(!this.isEdit) 
       this.groupService.addGroup(this.groupForm.value).subscribe(
-        () => this.groupService.groupsChanged.next()
+        () => this.groupService.fetchGroups() // fetch groups instead of emitting an event to avoid 404 for fetching summaries
       );
     else {
       this.groupService.updateGroup(this.groupId, this.groupForm.value.name).subscribe(
@@ -78,6 +79,6 @@ export class GroupFormComponent {
   }
 
   goBack() {
-    this.router.navigate(['../'], {relativeTo: this.route})
+    this.location.back()
   }
 }
