@@ -47,7 +47,7 @@ export class ExpenseFormComponent implements OnInit {
     this.initForm()
     this.route.url.subscribe(
       (url: UrlSegment[]) => {
-        if(url[0].path === 'dashboard') {
+        if(url[0].path != 'edit') {
           this.isEdit = false;
           this.formHeading = "Add Expense";
           this.groupService.fetchGroups();
