@@ -28,6 +28,7 @@ export class ExpenseFormComponent implements OnInit {
   user: User;
   formHeading: string;
   isEdit = true;
+  showBackButton = false;
   
   dateTimeFormat = 'YYYY-MM-DD HH:mm';
 
@@ -49,6 +50,7 @@ export class ExpenseFormComponent implements OnInit {
       (url: UrlSegment[]) => {
         if(url[0].path != 'edit') {
           this.isEdit = false;
+          this.showBackButton = url[0].path != 'dashboard';
           this.formHeading = "Add Expense";
           this.groupService.fetchGroups();
           this.groupsSubscription = this.groupService.groups.subscribe(
@@ -181,7 +183,7 @@ export class ExpenseFormComponent implements OnInit {
     return control.errors ? control.errors.hasOwnProperty('isInvalidDate') && control.errors['isInvalidDate'] : false;
   }
 
-  onCancel() {
+  goBack() {
     this.location.back();
   }
 
