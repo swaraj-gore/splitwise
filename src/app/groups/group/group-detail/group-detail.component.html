@@ -1,8 +1,13 @@
 <div *ngIf="group">
   <div class="row">
     <div class="col-md-6">
+      <button class="btn btn-primary" style="margin-bottom: 10px; margin-right: 10px;" (click)="onEditGroup()">
+        <fa-icon [icon]="faEdit"></fa-icon> Group
+      </button>
+      <button class="btn btn-danger" style="margin-bottom: 10px; margin-right: 10px;" (click)="onDeleteGroup()">
+        <fa-icon [icon]="faDelete"></fa-icon> Group
+      </button>
       <h4>{{ group.name }}</h4>
-      <p>Total expense: ₹{{ group.total_expense }}</p>
       <ul *ngIf="expenses.length > 0" class="list-group">
         <app-expense
           *ngFor="let expense of expenses"

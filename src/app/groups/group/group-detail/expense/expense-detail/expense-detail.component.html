@@ -3,6 +3,10 @@
     <h5>{{expense.description}}</h5>
     <p>{{ user.name }} paid ₹{{expense.amount}}</p>
     <p>{{expense.expense_date | date: 'MMMM d, y'}}</p>
-    <button class="btn btn-primary" (click)="onEdit()" style="margin-right: 10px;">Edit</button>
-    <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+    <button class="btn btn-primary" (click)="onEdit()" style="margin-right: 10px;">
+        <fa-icon [icon]="faEdit"></fa-icon>
+    </button>
+    <button class="btn btn-danger" (click)="onDelete()">
+        <fa-icon [icon]="faDelete"></fa-icon>
+    </button>
 </div>

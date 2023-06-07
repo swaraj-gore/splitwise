@@ -1,6 +1,11 @@
 <div class="row">
   <div class="col-md-4">
-    <button style="margin-bottom: 10px" class="btn btn-primary" (click)="onAddGroup()">Add Group</button>
+    <button style="margin-bottom: 10px; margin-right: 10px;" class="btn btn-primary" (click)="onAddGroup()">
+      <fa-icon [icon]="faPlus"></fa-icon> Group
+    </button>
+    <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="onAddExpense()">
+      <fa-icon [icon]="faPlus"></fa-icon> Expense
+    </button>
     <h4>Groups</h4>
     <p *ngIf="groups.length === 0">Add groups to see the list here!</p>
     <ul class="list-group">
