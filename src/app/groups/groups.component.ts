@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from '../model/group.model';
 import { GroupService } from '../service/group.service';
 import { Subscription } from 'rxjs';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-groups',
@@ -10,9 +11,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit, OnDestroy {
+
+  faPlus = faPlus
+
   public groups: Group[] = []
 
   private groupsSubscription: Subscription;
+  private groupsChangedSubscription: Subscription;
 
   constructor(private groupService: GroupService,
               private router: Router,
@@ -25,17 +30,22 @@ export class GroupsComponent implements OnInit, OnDestroy {
       }
     )
     this.groupService.fetchGroups();
-    this.groupService.groupsChanged.subscribe(
+    this.groupsChangedSubscription = this.groupService.groupsChanged.subscribe(
       () => this.groupService.fetchGroups()
     )
   }
 
+  onAddExpense() {
+    this.router.navigate(['new-expense'], {relativeTo: this.route})
+  }
+
   onAddGroup() {
-    this.router.navigate(['new'], {relativeTo: this.route})
+    this.router.navigate(['new-group'], {relativeTo: this.route})
   }
 
   ngOnDestroy(): void {
     this.groupsSubscription?.unsubscribe();
+    this.groupsChangedSubscription.unsubscribe();
   }
 
 }
