@@ -1,3 +1,4 @@
+<button class="btn btn-light" *ngIf="showBackButton || isEdit" style="margin-bottom: 10px" (click)="goBack()">Back</button>
 <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
     <h5>{{formHeading}}</h5>
     <div class="form-group">
@@ -73,10 +74,4 @@
       style="margin-right: 10px"
       (click)="onReset()"
       >Reset</button>
-    <button
-      *ngIf="isEdit"
-      class="btn btn-light" 
-      type="button"
-      (click)="onCancel()"
-    >Cancel</button>
   </form>
